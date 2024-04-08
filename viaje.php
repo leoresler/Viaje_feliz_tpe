@@ -147,4 +147,18 @@ class Viaje {
         }
         return $cadena;
     }
+
+    // metodo para eliminar un pasajero
+    public function eliminaPasajero($indice){
+        $colPasajeros = $this->getPasajeros();
+        $indice = $indice - 1;
+        unset($colPasajeros[$indice]); // elimina el objeto pasajero ubicado en el $indice
+        $colPasajeros = array_values($colPasajeros); // muestro la coleccion actualizada con nuevos indices
+        $this->setPasajeros($colPasajeros);
+    }
+
+    public function __toString()
+    {
+        return "Codigo de viaje: " . $this->getCodigoDeViaje() . "\nDestino: " . $this->getDestino() . "\nCantidad maxima de pasajeros: " . $this->getCantMaxPasajeros() . "\nResponsable del viaje: " . $this->getResponsable();
+    }
 }
