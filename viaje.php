@@ -74,7 +74,7 @@ class Viaje {
     // metodo para modificar los datos de un pasajero
     public function modificarPasajero($indice, $nuevoNombre, $nuevoApellido, $nuevoTelefono, $numDoc) {
         $indice = $indice - 1; // Convertir para acceder al elemento 0
-        if (!($this->buscarPasajero($numDoc))) {
+        if (($this->buscarPasajero($numDoc) == true)) {
             $this->getPasajeros()[$indice]->setNombre($nuevoNombre);
             $this->getPasajeros()[$indice]->setApellido($nuevoApellido);
             $this->getPasajeros()[$indice]->setTelefono($nuevoTelefono);
@@ -90,6 +90,7 @@ class Viaje {
         $this->setPasajeros($this->getPasajeros());
     }
 
+   /* No se utiliza
     // metodo para agregar a la persona a cargo del viaje
     public function agregarResponsable($responsable) {
         $mensaje = "";
@@ -100,21 +101,16 @@ class Viaje {
             $mensaje = "Responsable agregado.";
         }
         return $mensaje;
-    }
-
+    } */
+ 
     // Metodo para modificar a la persona a cargo del viaje
     public function modificarResponsable($numEmpleado, $numLicencia, $nombre, $apellido) {
-        $mensaje = "";
         if ($this->getResponsable() != null && $this->getResponsable()->getNumEmpleado() == $numEmpleado) {
             $this->getResponsable()->setNumLicencia($numLicencia);
             $this->getResponsable()->setNombre($nombre);
             $this->getResponsable()->setApellido($apellido);
-            $mensaje = "Responsable modificado exitosamente.";
-        } else {
-            $mensaje = "La persona a la que quiere cambiarle sus datos no se encuentra en el viaje.";
         }
         $this->setResponsable($this->getResponsable());
-        return $mensaje;
     }
 
 
@@ -126,7 +122,7 @@ class Viaje {
             $objPasajero = new Pasajero ($nombre, $apellido, $numDoc, $telefono);
             array_push($colPasajeros, $objPasajero);
             $this->setPasajeros($colPasajeros);
-            $mensaje = "Nuevo pasajero agregado.";
+            $mensaje = "Nuevo pasajero agregado.\n";
         } else {
             $mensaje = "No pueden ingresar mas pasajeros al viaje.";
         }
@@ -159,6 +155,6 @@ class Viaje {
 
     public function __toString()
     {
-        return "Codigo de viaje: " . $this->getCodigoDeViaje() . "\nDestino: " . $this->getDestino() . "\nCantidad maxima de pasajeros: " . $this->getCantMaxPasajeros() . "\nResponsable del viaje: " . $this->getResponsable();
+        return "Codigo de viaje: " . $this->getCodigoDeViaje() . "\nDestino: " . $this->getDestino() . "\nCantidad maxima de pasajeros: " . $this->getCantMaxPasajeros() . "\nResponsable del viaje: " . $this->getResponsable() . "\nLista de pasajeros: " . $this->mostrarColPasajero();;
     }
 }
